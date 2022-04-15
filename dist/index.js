@@ -7051,7 +7051,8 @@ class GitCommandManager {
             const args = ['lfs', 'fetch', 'origin', ref];
             const that = this;
             yield retryHelper.execute(() => __awaiter(this, void 0, void 0, function* () {
-                yield that.execGit(args);
+                // yield that.execGit(args);
+                yield exec.exec(`/usr/local/bin/git-lfs fetch origin ${ref}`)
             }));
         });
     }
