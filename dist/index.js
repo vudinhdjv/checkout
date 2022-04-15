@@ -7246,7 +7246,8 @@ class GitCommandManager {
                 // Git-lfs version
                 core.debug('Getting git-lfs version');
                 let gitLfsVersion = new git_version_1.GitVersion();
-                const gitLfsPath = yield io.which('git-lfs', true);
+                // const gitLfsPath = yield io.which('git-lfs', true);
+                const gitLfsPath = '/usr/local/bin/git-lfs'
                 gitOutput = yield this.execGit(['lfs', 'version']);
                 stdout = gitOutput.stdout.trim();
                 if (!stdout.includes('\n')) {
