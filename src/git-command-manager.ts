@@ -469,8 +469,9 @@ class GitCommandManager {
       // Git-lfs version
       core.debug('Getting git-lfs version')
       let gitLfsVersion = new GitVersion()
-      const gitLfsPath = await io.which('git-lfs', true)
-      gitOutput = await this.execGit(['lfs', 'version'])
+      // const gitLfsPath = await io.which('git-lfs', true)
+      const gitLfsPath = '/usr/local/bin/git-lfs'
+      gitOutput = 'git-lfs/3.1.2 (GitHub; darwin amd64; go 1.17.6)'//yield this.execGit(['lfs', 'version']);
       stdout = gitOutput.stdout.trim()
       if (!stdout.includes('\n')) {
         const match = stdout.match(/\d+\.\d+(\.\d+)?/)

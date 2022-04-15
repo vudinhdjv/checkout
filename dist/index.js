@@ -7242,31 +7242,32 @@ class GitCommandManager {
             if (!gitVersion.checkMinimum(exports.MinimumGitVersion)) {
                 throw new Error(`Minimum required git version is ${exports.MinimumGitVersion}. Your git ('${this.gitPath}') is ${gitVersion}`);
             }
-            if (this.lfs) {
-                // Git-lfs version
-                core.debug('Getting git-lfs version');
-                let gitLfsVersion = new git_version_1.GitVersion();
-                // const gitLfsPath = yield io.which('git-lfs', true);
-                const gitLfsPath = '/usr/local/bin/git-lfs'
-                gitOutput = yield this.execGit(['lfs', 'version']);
-                stdout = gitOutput.stdout.trim();
-                if (!stdout.includes('\n')) {
-                    const match = stdout.match(/\d+\.\d+(\.\d+)?/);
-                    if (match) {
-                        gitLfsVersion = new git_version_1.GitVersion(match[0]);
-                    }
-                }
-                if (!gitLfsVersion.isValid()) {
-                    throw new Error('Unable to determine git-lfs version');
-                }
-                // Minimum git-lfs version
-                // Note:
-                // - Auth header not supported before 2.1
-                const minimumGitLfsVersion = new git_version_1.GitVersion('2.1');
-                if (!gitLfsVersion.checkMinimum(minimumGitLfsVersion)) {
-                    throw new Error(`Minimum required git-lfs version is ${minimumGitLfsVersion}. Your git-lfs ('${gitLfsPath}') is ${gitLfsVersion}`);
-                }
-            }
+            // if (this.lfs) {
+            //     // Git-lfs version
+            //     core.debug('Getting git-lfs version');
+            //     let gitLfsVersion = new git_version_1.GitVersion();
+            //     // const gitLfsPath = yield io.which('git-lfs', true);
+            //     const gitLfsPath = '/usr/local/bin/git-lfs'
+            //     gitOutput = yield this.execGit(['lfs', 'version']);
+            //     gitOutput = 'git-lfs/3.1.2 (GitHub; darwin amd64; go 1.17.6)'//yield this.execGit(['lfs', 'version']);
+            //     stdout = gitOutput.stdout.trim();
+            //     if (!stdout.includes('\n')) {
+            //         const match = stdout.match(/\d+\.\d+(\.\d+)?/);
+            //         if (match) {
+            //             gitLfsVersion = new git_version_1.GitVersion(match[0]);
+            //         }
+            //     }
+            //     if (!gitLfsVersion.isValid()) {
+            //         throw new Error('Unable to determine git-lfs version');
+            //     }
+            //     // Minimum git-lfs version
+            //     // Note:
+            //     // - Auth header not supported before 2.1
+            //     const minimumGitLfsVersion = new git_version_1.GitVersion('2.1');
+            //     if (!gitLfsVersion.checkMinimum(minimumGitLfsVersion)) {
+            //         throw new Error(`Minimum required git-lfs version is ${minimumGitLfsVersion}. Your git-lfs ('${gitLfsPath}') is ${gitLfsVersion}`);
+            //     }
+            // }
             // Set the user agent
             const gitHttpUserAgent = `git/${gitVersion} (github-actions-checkout)`;
             core.debug(`Set git useragent to: ${gitHttpUserAgent}`);
