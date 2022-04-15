@@ -7059,6 +7059,7 @@ class GitCommandManager {
     lfsInstall() {
         return __awaiter(this, void 0, void 0, function* () {
             // yield this.execGit(['lfs', 'install', '--local']);
+            yield exec.exec(`git config http.postBuffer 524288000`)
             yield exec.exec(`/usr/local/bin/git-lfs install --local`)
         });
     }
